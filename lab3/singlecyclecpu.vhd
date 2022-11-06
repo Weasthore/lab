@@ -174,15 +174,15 @@ U4: MUX64 port map(in0 => aluresult,in1 => dmemout,sel => MemtoReg,output => WD)
 U5: MUX64 port map(in0 => add4out,in1 => addslout,sel => orout,output => pcin);
 U6: ShiftLeft2 port map(x => signextendout,y => slout);
 U7: SignExtend port map(x => instruction(31 downto 0),y => signextendout);
-U8: PC port map(clk => clk,write_enable => write_enable,rst => rst,AddressIn => pcin,AddressOut=>pcout);
+U8: PC port map(clk => clk,write_enable => write_enable,rst => rst,AddressIn => pcin,AddressOut=>pcout); DEBUG_PC <= pcout;
 U9: ADD port map(in0 => pcout,in1 => slout,output => addslout);
 U10: ADD port map(in0 => pcout,in1 => PC4,output => add4out);
 U11: ALU port map(in0 => RD1,in1 => aluin,operation => aluctrlout,result => aluresult,zero => zero,overflow => open);
 U12: ALUControl port map(ALUOp => ALUOp,Opcode => instruction(31 downto 21),Operation => aluctrlout);
 U13: CPUControl port map(Opcode => instruction(31 downto 21),Reg2Loc => Reg2Loc,CBranch => CBranch,MemRead => MemRead,MemWrite => MemWrite,ALUSrc => ALUSrc,RegWrite => RegWrite,UBranch => UBranch,ALUOp => ALUOp,MemtoReg => MemtoReg);
-U14: registers port map(RR1 => instruction(9 downto 5),RR2 => mux5out,WR => instruction(4 downto 0),WD => WD,RegWrite => RegWrite,Clock => clk,RD1 => RD1,RD2 => RD2);
-U15: IMEM port map(Address => pcout,ReadData => instruction);
-U16: DMEM port map(WriteData => RD2,Address => aluresult,MemRead => MemRead,MemWrite => MemWrite,Clock => clk,ReadData => dmemout);
+U14: registers port map(RR1 => instruction(9 downto 5),RR2 => mux5out,WR => instruction(4 downto 0),WD => WD,RegWrite => RegWrite,Clock => clk,RD1 => RD1,RD2 => RD2, DEBUG_TMP_REGS => DEBUG_TMP_REGS, DEBUG_SAVED_REGS => DEBUG_SAVED_REGS);
+U15: IMEM port map(Address => pcout,ReadData => instruction);  DEBUG_INSTRUCTION <= instruction;
+U16: DMEM port map(WriteData => RD2,Address => aluresult,MemRead => MemRead,MemWrite => MemWrite,Clock => clk,ReadData => dmemout, DEBUG_MEM_CONTENTS => DEBUG_MEM_CONTENTS);
 
 end behv_SingleCycleCPU;  
 

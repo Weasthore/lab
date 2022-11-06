@@ -21,14 +21,24 @@ architecture cpu_tb of cpu_tb is
 );
   end component;  
   
-  signal clk :std_logic;
-  signal rst :std_logic;    
+  signal clk :STD_LOGIC;
+  signal rst :STD_LOGIC;
+  signal DEBUG_PC : STD_LOGIC_VECTOR(63 downto 0);
+  signal DEBUG_INSTRUCTION :  STD_LOGIC_VECTOR(31 downto 0);
+  signal DEBUG_TMP_REGS :  STD_LOGIC_VECTOR(64*4 - 1 downto 0);
+  signal DEBUG_SAVED_REGS :  STD_LOGIC_VECTOR(64*4 - 1 downto 0);
+  signal DEBUG_MEM_CONTENTS : STD_LOGIC_VECTOR(64*4 - 1 downto 0);    
   constant clk_period: time := 200 ns;
   begin  
     uut: SingleCycleCPU port map  
     (  
-      clk=>clk,
-      rst=>rst
+      clk => clk,
+      rst => rst,
+      DEBUG_PC => DEBUG_PC,
+      DEBUG_INSTRUCTION  => DEBUG_INSTRUCTION,
+      DEBUG_TMP_REGS     => DEBUG_TMP_REGS,
+      DEBUG_SAVED_REGS   => DEBUG_SAVED_REGS,
+      DEBUG_MEM_CONTENTS => DEBUG_MEM_CONTENTS
       );  
       
   clk_process : process
