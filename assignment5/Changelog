@@ -1,0 +1,29 @@
+1. 新增一个pc端口:PCWrite(修改write_enable 为PCWrite) 
+修改pipelinecpu0内pc和u2中的we为pc
+2. 新增一个ifid端口:ifidWrite 
+3. 新增idex          IdEx_Rn_out       : in std_logic_vector(4 downto 0);    
+          IdEx_Rm_out       : in std_logic_vector(4 downto 0);    
+          IdEx_Rd_out       : in std_logic_vector(4 downto 0);  
+4.新增exmem memwb Rd4.新增exmem memwb Rd4.新增exmem memwb Rd4.新增exmem memwb Rd
+
+
+LDUR  X9, [XZR, 0]
+11111000 01000000 00000000 00001001
+
+ADD   X9, X9, X9
+10001011 00001001 00000001 00101001
+
+ADD   X10, X9, X9
+10001011 00001001 00000001 00101010
+
+SUB   X11, X10, X9
+11001011 00001001 00000001 01001011
+
+STUR  X11, [XZR, 8]
+11111000 00000000 00000000 00001011
+
+STUR  X11, [XZR, 12]
+11111000 00000000 00000000 00001011
+
+NOP
+NOP NOP NOP
