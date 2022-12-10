@@ -6,7 +6,7 @@ use ieee.std_logic_unsigned.all;
 entity IdEx is 
 port(
 		  clk              : in std_logic;
-          IdEx_RegDst_in   : in STD_LOGIC;
+          IdEx_Reg2Loc_in   : in STD_LOGIC;
           IdEx_CBranch_in  : in STD_LOGIC;
           IdEx_MemRead_in  : in STD_LOGIC;
           IdEx_MemtoReg_in : in STD_LOGIC;
@@ -19,15 +19,15 @@ port(
           IdEx_RD2_in       : in STD_LOGIC_VECTOR (63 downto 0);       
           IdEx_pc_in       : in std_logic_vector(63 downto 0);   
           IdEx_signextend_in       : in std_logic_vector(63 downto 0);  
-          IdEx_instr11_in       : in std_logic_vector(10 downto 0);  
-          IdEx_instr5_in       : in std_logic_vector(4 downto 0);       
+          IdEx_instruction11_in       : in std_logic_vector(10 downto 0);  
+          IdEx_instruction5_in       : in std_logic_vector(4 downto 0);       
           IdEx_Rn_in       : in std_logic_vector(4 downto 0);    
           IdEx_Rm_in       : in std_logic_vector(4 downto 0);    
           IdEx_Rd_in       : in std_logic_vector(4 downto 0);    
-		  IdEx_sturins_in       : in std_logic_vector(10 downto 0);    
+	  IdEx_sturinstruct_in        : in std_logic_vector(10 downto 0);    
           
            
-          IdEx_RegDst      : out STD_LOGIC;
+          IdEx_Reg2Loc      : out STD_LOGIC;
           IdEx_CBranch     : out STD_LOGIC;
           IdEx_MemRead     : out STD_LOGIC;
           IdEx_MemtoReg    : out STD_LOGIC;
@@ -40,12 +40,12 @@ port(
           IdEx_RD2          : out STD_LOGIC_VECTOR (63 downto 0);
           IdEx_pc       : out std_logic_vector(63 downto 0);  
           IdEx_signextend       : out std_logic_vector(63 downto 0);  
-          IdEx_instr11       : out std_logic_vector(10 downto 0);  
+          IdEx_instruction11       : out std_logic_vector(10 downto 0);  
           IdEx_Rn_out       : out std_logic_vector(4 downto 0);    
           IdEx_Rm_out       : out std_logic_vector(4 downto 0);    
           IdEx_Rd_out       : out std_logic_vector(4 downto 0);  
-          IdEx_sturins_out       : out std_logic_vector(10 downto 0);    		  
-          IdEx_instr5       : out std_logic_vector(4 downto 0)
+          IdEx_sturinstruct_out       : out std_logic_vector(10 downto 0);    		  
+          IdEx_instruction5       : out std_logic_vector(4 downto 0)
 );   
 end IdEx;
 
@@ -55,7 +55,7 @@ begin
 process(clk)
         begin
             if( clk'event and clk = '1') then
-                IdEx_RegDst <= IdEx_RegDst_in;
+                IdEx_Reg2Loc <= IdEx_Reg2Loc_in;
                 IdEx_CBranch <= IdEx_CBranch_in;
                 IdEx_MemRead <= IdEx_MemRead_in;
                 IdEx_MemtoReg <= IdEx_MemtoReg_in;
@@ -68,12 +68,12 @@ process(clk)
                 IdEx_RD2 <= IdEx_RD2_in;
                 IdEx_pc <= IdEx_pc_in;
                 IdEx_signextend <= IdEx_signextend_in;
-                IdEx_instr11 <= IdEx_instr11_in;
-                IdEx_instr5 <= IdEx_instr5_in;         
+                IdEx_instruction11 <= IdEx_instruction11_in;
+                IdEx_instruction5 <= IdEx_instruction5_in;         
                 IdEx_Rn_out <= IdEx_Rn_in;
                 IdEx_Rm_out <= IdEx_Rm_in;
                 IdEx_Rd_out <= IdEx_Rd_in;      
-				IdEx_sturins_out <= IdEx_sturins_in;   				
+		IdEx_sturinstruct_out  <= IdEx_sturinstruct_in ;   				
             end if;
         end process;
 end behavioral;
